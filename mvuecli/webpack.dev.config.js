@@ -1,0 +1,89 @@
+let config = require('./config.js');
+let baseconfig = require('./webpack.base.config.js');
+let path = require('path');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');//报错提示
+const portfinder = require('portfinder');//端口处理，如果发现端口被占，会另起端口
+
+let myerror=() => {
+    const notifier = require('node-notifier')
+  
+    return (severity, errors) => {
+      if (severity !== 'error') return
+  
+      const error = errors[0]
+      const filename = error.file && error.file.split('!').pop()
+  
+      notifier.notify({
+        title: packageConfig.name,
+        message: severity + ': ' + error.name,
+        subtitle: filename || '',
+        icon: path.join(__dirname, 'logo.png')
+      })
+    }
+  }
+
+
+
+ var devbaseconfig= {
+    // context: path.resolve(__dirname, './'),
+    // optimization: baseconfig.optimization,
+    entry: baseconfig.entry,
+    output: {
+        filename: 'js/[name][hash:8].js',
+        path: path.resolve(__dirname, './dist'),
+        publicPath: '/' //dev '/dist'//pro
+
+    },
+    devtool: config.dev.devtool,
+    devServer: {
+        contentBase: false,
+        historyApiFallback:true,
+        open: config.dev.autoOpenBrowser,
+        hot: true,
+        compress: true,
+        host: config.dev.host,
+        port: 9097,
+        progress: false,
+        quiet: true,
+        proxy: config.dev.proxyTable,
+        publicPath: config.dev.assetsPublicPath,
+        watchOptions: {
+            poll: false
+        },
+        overlay: config.dev.errorOverlay ? { warnings: false, errors: true } : false,
+    },
+    mode: 'development',
+    resolve: baseconfig.resolve,
+    module: baseconfig.module,
+    plugins: baseconfig.plugins,
+    externals: {
+        // 'vue': 'Vue',
+        // 'vue-router' : 'VueRouter'
+    }
+}
+
+module.exports = new Promise((resolve, reject) => {
+    portfinder.basePort = process.env.PORT || config.dev.port
+    portfinder.getPort((err, port) => {
+      if (err) {
+        reject(err)
+      } else {
+        // publish the new Port, necessary for e2e tests
+        process.env.PORT = port
+        // add port to devServer config
+        devbaseconfig.devServer.port = port
+  
+        // Add FriendlyErrorsPlugin
+        devbaseconfig.plugins.push(new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: [`Your application is running here: http://${devbaseconfig.devServer.host}:${port}`],
+          },
+          onErrors: config.dev.notifyOnErrors
+          ? myerror()
+          : undefined
+        }))
+  
+        resolve(devbaseconfig)
+      }
+    })
+  })

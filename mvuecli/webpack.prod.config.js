@@ -11,7 +11,6 @@ module.exports = {
         filename: 'js/[name][hash:8].js',
         path: config.build.assetsRoot,
         publicPath: config.build.assetsPublicPath //dev '/dist'//pro
-
     },
     mode: 'production',
     devtool: config.build.productionSourceMap ? config.build.devtool : false,
@@ -19,7 +18,7 @@ module.exports = {
     module: baseconfig.module,
     plugins: baseconfig.plugins,
     externals: {
-        // 'vue': 'Vue',
-        // 'vue-router' : 'VueRouter'
+        // 'vue': 'Vue', //Vue不参与编译，以cnd的形式引入
+        // 'vue-router' : //VueRouter不参与编译，以cnd的形式引入
     }
 }
