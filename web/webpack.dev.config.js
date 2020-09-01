@@ -3,7 +3,7 @@ let baseconfig = require('./webpack.base.config.js');
 let path = require('path');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
-
+const packageConfig = require('../package.json');
 let myerror=() => {
     const notifier = require('node-notifier')
   
