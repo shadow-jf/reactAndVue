@@ -1,37 +1,37 @@
 {
-    "presets": [
-        [
-            // "env",
-            "@babel/preset-env",
-            // {
-            //     "targets": "> 0.25%, not dead"
-            // }
-            {
-                "modules": false,
-                "targets": {
-                    "browsers": [
-                        "> 1%",
-                        "last 2 versions",
-                        "not ie <= 8"
-                    ]
-                }
-            }
-        ],
-        "@babel/preset-react"
+  "presets": [
+    [
+      // "env",
+      "@babel/preset-env",
+      // {
+      //     "targets": "> 0.25%, not dead"
+      // }
+      {
+        "modules": false,
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "last 2 versions",
+            "not ie <= 8"
+          ]
+        }
+      }
     ],
-    "plugins": [
-        [
-            "@babel/plugin-proposal-decorators",
-            {
-                "legacy": true
-            }
-        ],
-        [
-            "@babel/plugin-proposal-class-properties",
-            {
-                "loose": true
-            }
-        ],
-        "@babel/plugin-transform-runtime"
-    ]
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    "@babel/plugin-transform-runtime"
+  ]
 }

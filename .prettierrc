@@ -1,0 +1,8 @@
+{
+  "printWidth": 200,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "arrowParens": "always",
+  "trailingComma": "es5",
+  "svelteSortOrder": "scripts-styles-options-markup"
+}

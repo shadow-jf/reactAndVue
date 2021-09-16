@@ -1,21 +1,22 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 Vue.use(Router);
 
 const hello = resolve => require(['../content/hello.vue'], resolve);
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
-    routes: [{
-        path: '/',
-        name: 'app',
-        component: hello,
-        meta: {
-            title: 'hello'
-        }
-    }]
-})
+  routes: [{
+    path: '/',
+    name: 'app',
+    component: hello,
+    meta: {
+      title: 'hello',
+    },
+  }],
+});
 
 
-export default router
+export default router;
